@@ -15,14 +15,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [theme, setTheme] = useState<Theme>('dark');
 
     useEffect(() => {
-        // Get saved theme from localStorage or use system preference
+
         const savedTheme = localStorage.getItem('theme') as Theme;
         const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         setTheme(savedTheme || systemTheme);
     }, []);
 
     useEffect(() => {
-        // Update document class and localStorage when theme changes
+    
         document.documentElement.classList.remove('dark', 'light');
         document.documentElement.classList.add(theme);
         localStorage.setItem('theme', theme);

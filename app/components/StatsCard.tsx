@@ -10,10 +10,10 @@ interface StatsCardProps {
 const StatsCard: React.FC<StatsCardProps> = ({ title, value, subtitle, infoIcon = false }) => {
   return (
     <div className="relative group">
-      {/* Dotted border overlay */}
+    {/* for border */}
       <div className="absolute inset-0 rounded-lg border border-dashed border-black/20 dark:border-white/20 -m-1"></div>
 
-      {/* Main card */}
+      {/* for card */}
       <div className="bg-black/5 dark:bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-black/10 dark:border-white/10 w-full transition-all duration-300 group-hover:bg-black/[0.07] dark:group-hover:bg-white/[0.07]">
         <div className="flex justify-between items-start mb-4">
           <h3 className="text-sm text-black/60 dark:text-white/60">{title}</h3>

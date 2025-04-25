@@ -8,6 +8,12 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [mounted, setMounted] = useState(false);
+
+  // Use useEffect to handle client-side mounting
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Empty data for the chart since the user has no songs yet
   const data = [
@@ -24,6 +30,11 @@ export default function Home() {
     { name: 'Nov', earnings: 0 },
     { name: 'Dec', earnings: 0 },
   ];
+
+  // Don't render anything until mounted (client-side)
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -124,13 +135,20 @@ export default function Home() {
                     className="dark:[&_.recharts-cartesian-axis-tick-value]:fill-[rgba(255,255,255,0.8)] dark:[&_.recharts-cartesian-axis-line]:stroke-[rgba(255,255,255,0.2)] dark:[&_.recharts-cartesian-axis-tick-line]:stroke-[rgba(255,255,255,0.2)]"
                   />
                   <Tooltip
-                    contentStyle={{
+                    wrapperStyle={{
                       backgroundColor: 'rgba(255,255,255,0.95)',
                       border: '1px solid rgba(0,0,0,0.1)',
                       borderRadius: '8px',
                       color: '#000',
                     }}
-                    className="dark:[&_.recharts-tooltip-wrapper]:!bg-black/90 dark:[&_.recharts-tooltip-wrapper]:!text-white dark:[&_.recharts-tooltip-wrapper]:!border-white/20"
+                    labelStyle={{ color: '#000' }}
+                    itemStyle={{ color: '#000' }}
+                    contentStyle={{
+                      backgroundColor: 'rgba(255,255,255,0.95)',
+                      border: '1px solid rgba(0,0,0,0.1)',
+                      borderRadius: '8px',
+                    }}
+                    wrapperClassName="dark:!bg-black/90 dark:!text-white dark:!border-white/20"
                   />
                   <Line
                     type="monotone"
